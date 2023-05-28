@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --colorA: #27374D;
+    --colorB: #526D82;
+    --colorC: #9DB2BF;
+    --colorD: #DDE6ED;
+    --colorE: #4942E4;
+  }
+
+body {
+    font: 400 14px Roboto, sans-serif;
+    background: var(--colorD);
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea {
+    font: 400 18px Roboto, sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+.fipe-explorer-container {
+    width: 60%;
+    margin: auto;
+    padding: 2rem 0 2rem 0;
+}
+
+.select-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 1rem;
+}
+
+.select-field select {
+    width: 20%;
+    height: 2rem;
+    border: none;
+    border-radius: 1rem;
+    color: var(--colorB);
+    padding: 0.4rem;
+}
+
+.search-result,
+.vehicle-cards-container {
+    padding-top: 1.4rem;
+}
+
+.title {
+    color: var(--colorA);
+}
+
+.vehicle {
+    margin-top: 0.5rem;
+    height: 14rem;
+}
+
+.vehicle .vehicle-content {
+    height: 100%;
+    background-color: var(--colorE);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty-field {
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.subtitle {
+    color: var(--colorA);
+    margin-left: 0.4rem;
+    width: 10rem;
+}
+
+.vehicle-content h4,
+.vehicle-content p {
+    color: var(--colorD);
+    margin-top: 0.5rem;
+}
