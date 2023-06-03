@@ -38,12 +38,12 @@ button {
 .select-field {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 1rem;
 }
 
 .select-field select {
-    width: 20%;
+    width: 30%;
     height: 2rem;
     border: none;
     border-radius: 1rem;
@@ -93,4 +93,5 @@ button {
 .vehicle-content p {
     color: var(--colorD);
     margin-top: 0.5rem;
+    text-align: center;
 }
