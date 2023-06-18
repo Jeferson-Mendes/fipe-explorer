@@ -4,8 +4,29 @@ const mockFavorites = [
         type: 'carros',
         brandCode: '23',
         brandName: 'GM - Chevrolet',
+        modelCode: 8950,
+        modelName: "ONIX SEDAN Plus LT 1.0 12V Flex 4p Mec.",
+        pictureUrl: 'https://image1.mobiauto.com.br/images/api/images/v1.0/110103727/transform/fl_progressive,f_webp,q_70',
+        yearCode: '2023-1',
+        yearNome: "2023 Gasolina"
+    },
+    {
+        type: 'carros',
+        brandCode: '23',
+        brandName: 'GM - Chevrolet',
+        modelCode: 8950,
+        modelName: "ONIX SEDAN Plus LT 1.0 12V Flex 4p Mec.",
+        pictureUrl: 'https://img.olx.com.br/images/80/804237747617862.jpg',
+        yearCode: '2022-1',
+        yearNome: "2022 Gasolina"
+    },
+    {
+        type: 'carros',
+        brandCode: '23',
+        brandName: 'GM - Chevrolet',
         modelCode: 8949,
         modelName: "ONIX HATCH LT 1.0 12V Flex 5p Mec.",
+        pictureUrl: 'https://img.olx.com.br/images/18/183223822248138.jpg',
         yearCode: '2022-1',
         yearNome: "2022 Gasolina"
     },
@@ -15,6 +36,7 @@ const mockFavorites = [
         brandName: 'Hyundai',
         modelCode: 8855,
         modelName: "HB20 Vision 1.0 Flex 12V Mec.",
+        pictureUrl: 'https://quatrorodas.abril.com.br/wp-content/uploads/2021/03/Hyundai-HB20-Sense-2022-1.jpg?quality=70&strip=info',
         yearCode: '2022-1',
         yearNome: "2022 Gasolina"
     }
@@ -44,7 +66,7 @@ class FipeExplorer {
         return fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${favorite.brandCode}/modelos/${favorite.modelCode}/anos/${favorite.yearCode}`)
         .then(res => res.json())
         .then(data => {
-            return data
+            return {...data, pictureUrl: favorite.pictureUrl}
         }).catch(err => {
             console.error('Error: ', err)
         })
@@ -69,10 +91,9 @@ class FipeExplorer {
     async renderFavorites() {
         const vehicleFields = document.querySelector('.vehicle-fields')
         const data = await this.callFetchFavoriteData()
-    
         const child = data.map(item => `
         <div class="vehicle">
-            <div class="vehicle-content">
+            <div class="vehicle-content" style="background-image: url(${item.pictureUrl ?? ''}); background-size: cover; background-position: center; background-blend-mode: multiply;">
                 <h4>${item.Modelo}</h4>
                 <p>${item.AnoModelo}</p>
                 <p>${item.Combustivel}</p>
@@ -81,7 +102,7 @@ class FipeExplorer {
             </div>
         </div>
         `)
-        
+        console.log(child)
         vehicleFields.innerHTML = child.join(' ')
     }
 
