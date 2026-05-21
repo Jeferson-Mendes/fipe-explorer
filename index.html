@@ -4,57 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="./style/index.css">
     <title>FIPE EXPLORER</title>
-
 </head>
 <body>
     <div class="fipe-explorer-container">
-        <div>
-            <div class="header-container">
+        <main>
+            <header class="header-container" role="banner">
                 <div class="text-field">
-                    <h2 class="title"> Olá, <span class="bold-title"> Boa tarde! </span> </h2>
+                    <h2 class="title">Olá, <span class="bold-title">Boa tarde!</span></h2>
                     <span>Busque preços atualizados de forma rápida.</span>
                 </div>
-    
-                <div class="select-field">
-                    <select title="brand" name="marcas" id="brand">
-                        <option value="0">Marca</option>
+
+                <form class="select-field" role="search" aria-label="Buscar veículo">
+                    <label class="sr-only" for="brand">Marca</label>
+                    <select id="brand" name="marcas" aria-label="Marca">
+                        <option value="">Marca</option>
                     </select>
-    
-                    <select title="model" name="modelos" id="model">
-                        <option value="0">Modelo</option>
+
+                    <label class="sr-only" for="model">Modelo</label>
+                    <select id="model" name="modelos" aria-label="Modelo">
+                        <option value="">Modelo</option>
                     </select>
-    
-                    <select title="year" name="anos" id="year">
-                        <option value="0">Ano</option>
+
+                    <label class="sr-only" for="year">Ano</label>
+                    <select id="year" name="anos" aria-label="Ano">
+                        <option value="">Ano</option>
                     </select>
-                </div>
-            </div>
-            
-            <div class="search-result">
-                <h2 class="title">Resultado</h2>
-                <div class="vehicle-field-result">
+                </form>
+            </header>
+
+            <section class="search-result" aria-labelledby="result-title">
+                <h2 class="title" id="result-title">Resultado</h2>
+                <div class="vehicle-field-result" aria-live="polite">
                     <div class="vehicle">
                         <div class="empty-field">
-                            <img height="100%" src="./img/undraw_no_data.svg" alt="empty">
+                            <img height="100%" src="./img/undraw_no_data.svg" alt="Sem dados">
                             <p class="subtitle">Acima, selecione modelos para buscar preços atualizados</p>
                         </div>
                     </div>
                 </div>
-            </div>
-    
-            <div class="vehicle-cards-container">
-                <h2 class="title">Favoritos</h2>
-                <div class="vehicle-fields">
-                    
-                </div>
-            </div>
-        </div>
+            </section>
 
+            <section class="vehicle-cards-container" aria-labelledby="fav-title">
+                <h2 class="title" id="fav-title">Favoritos</h2>
+                <div class="vehicle-fields" aria-live="polite"></div>
+            </section>
+        </main>
     </div>
 
-    <script type="text/javascript" src="./index.js"></script>
+    <script src="./index.js" type="module"></script>
 </body>
 </html>

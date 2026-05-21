@@ -1,97 +1,115 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; outline: 0; }
 
 :root {
-    --colorA: #27374D;
-    --colorB: #526D82;
-    --colorC: #9DB2BF;
-    --colorD: #DDE6ED;
-    --colorE: #4942E4;
-  }
+    --bg: #f4f7fb;
+    --surface: #ffffff;
+    --accent: #5566d6;
+    --muted: #9db2bf;
+    --text: #12202b;
+    --card-shadow: 0 8px 24px rgba(15,23,42,0.08);
+}
 
 body {
-    font: 400 14px Roboto, sans-serif;
-    background: var(--colorD);
+    font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    font-size: 15px;
+    color: var(--text);
+    background: linear-gradient(180deg, var(--bg) 0%, #eef4fb 100%);
     -webkit-font-smoothing: antialiased;
-}
-
-input, button, textarea {
-    font: 400 18px Roboto, sans-serif;
-}
-
-button {
-    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.4;
 }
 
 .fipe-explorer-container {
-    width: 60%;
-    margin: auto;
-    padding: 2rem 0 2rem 0;
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 1.5rem;
 }
 
-.select-field {
+.header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
 }
+
+.text-field .title { font-size: 1.25rem; margin-bottom: 0.2rem; color: var(--text); }
+.bold-title { font-weight: 700; color: var(--accent); }
+.text-field span { color: var(--muted); font-size: 0.95rem; }
+
+.select-field { display:flex; gap: 0.6rem; align-items:center; flex-wrap:wrap; }
 
 .select-field select {
-    width: 30%;
-    height: 2rem;
-    border: none;
-    border-radius: 1rem;
-    color: var(--colorB);
-    padding: 0.4rem;
+    appearance: none; background: var(--surface); border: 1px solid rgba(16,24,40,0.06);
+    padding: 0.6rem 0.85rem; border-radius: 8px; min-width: 140px; box-shadow: var(--card-shadow);
+    color: var(--text); font-weight: 500;
 }
 
-.search-result,
-.vehicle-cards-container {
-    padding-top: 1.4rem;
+.select-field select:focus { outline: none; box-shadow: 0 0 0 4px rgba(85,102,214,0.08); border-color: var(--accent); }
+
+.search-result, .vehicle-cards-container { margin-top: 1.4rem; }
+
+.title { color: var(--text); font-weight: 600; }
+
+.vehicle-field-result { margin-top: 0.75rem; }
+
+.vehicle-field-result .vehicle,
+.vehicle-cards-container .vehicle-fields .vehicle {
+    height: 180px; border-radius: 12px; overflow: hidden; background: var(--surface);
+    box-shadow: var(--card-shadow); position: relative;
 }
 
-.title {
-    color: var(--colorA);
-}
-
-.vehicle {
-    margin-top: 0.5rem;
-    height: 14rem;
-}
+.vehicle-cards-container .vehicle-fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
 
 .vehicle .vehicle-content {
-    height: 100%;
-    background-color: var(--colorE);
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    height: 100%; display:flex; flex-direction:column; justify-content:flex-end; padding:1rem; color:#fff;
+    background-size: cover; background-position:center; transition: transform .22s ease, box-shadow .22s ease; position:relative;
 }
 
-.empty-field {
-    height: 100%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+.vehicle .vehicle-content::after { content: ''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.6) 70%); pointer-events: none; }
+
+.vehicle .vehicle-content h4 { margin:0 0 4px 0; z-index:1; font-size:1.02rem; font-weight:600; }
+.vehicle .vehicle-content p { margin:0; z-index:1; font-size:0.85rem; opacity:0.95; }
+.vehicle .vehicle-content .price { margin-top:6px; font-weight:700; font-size:0.95rem; }
+
+.vehicle:hover .vehicle-content { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(15,23,42,0.12); }
+
+.empty-field { display:flex; align-items:center; justify-content:center; gap:1rem; padding:1rem; }
+
+.subtitle { color: var(--muted); font-size:0.95rem; max-width:14rem; text-align:center; }
+
+.loading { padding:1rem; color:var(--muted); font-weight:500; }
+
+.sr-only { position:absolute!important; height:1px;width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+/* Autocomplete styles */
+.autocomplete-wrapper { position: relative; display:inline-block; }
+.autocomplete-input {
+    width: 220px; padding: 0.55rem 0.8rem; border-radius: 8px; border: 1px solid rgba(16,24,40,0.06);
+    background: var(--surface); box-shadow: var(--card-shadow); font-weight:500; color:var(--text);
+}
+.autocomplete-list {
+    position: absolute; left: 0; right: auto; top: calc(100% + 8px); z-index: 60;
+    background: var(--surface); box-shadow: 0 10px 30px rgba(15,23,42,0.08); border-radius: 8px; list-style:none; padding: 6px; margin:0;
+    min-width: 220px; max-height: 240px; overflow:auto; border: 1px solid rgba(16,24,40,0.04);
+}
+.autocomplete-item { padding: 0.6rem 0.8rem; cursor: pointer; border-radius:6px; margin:2px 0; }
+.autocomplete-item.active, .autocomplete-item:hover { background: rgba(85,102,214,0.08); }
+.autocomplete-no-results { padding: 0.6rem 0.8rem; color: var(--muted); }
+
+.clear-result {
+    margin-top: 0.6rem; padding: 6px 10px; border-radius: 8px; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.14); color: #fff; font-weight:600; align-self:flex-start;
 }
 
-.subtitle {
-    color: var(--colorA);
-    margin-left: 0.4rem;
-    width: 10rem;
-}
-
-.vehicle-content h4,
-.vehicle-content p {
-    color: var(--colorD);
-    margin-top: 0.5rem;
-    text-align: center;
+@media (max-width: 820px) {
+    .fipe-explorer-container { padding:1rem; }
+    .header-container { flex-direction:column; align-items:flex-start; }
+    .select-field { width:100%; justify-content:flex-start; }
+    .select-field select { min-width: 120px; }
+    .vehicle-field-result .vehicle,
+    .vehicle-cards-container .vehicle-fields .vehicle { height: 160px; }
 }
